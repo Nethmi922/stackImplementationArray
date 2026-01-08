@@ -2,13 +2,15 @@
 #include <stdlib.h>
 typedef enum{FALSE,TRUE} Boolean;
 
-#define N 5
+#define n 5
 
 
+struct stack{
+    int top;
+    int arr[n];
+};
 
 
-//int top = -1;
-//int stack[N];
 
 
 
@@ -20,53 +22,52 @@ Boolean isEmpty(int top){
 
 Boolean isFull(int top){
 
-   return (top == N-1);
-          // printf("overflow condition occur");
+   return (top == n-1);
+
 }
 
 
+void createstack(struct stack *s){
+    s->top=-1;
+}
 
 
-void push(int entry,int *top,int stack[]){
+void push(int entry,struct stack *s){
 
 
-        if(isFull(*top)){
+        if(isFull(s->top)){
             printf("overflow");
-           // printf("%d",top);
-            //top--;
+
         }else{
-         ++(*top);
-         //printf("%d",top);
-       // printf("Enter your number: ");
-       // scanf("%d",&stack[top]);
-         stack[*top]=entry;
+         ++(s->top);
+         s ->arr[s->top]=entry;
 
         printf("\n\nsuccessfully entered the value %d",entry);
 
         }
 }
 
-void pop(int *top,int stack[]){
+void pop(struct stack *s){
 
-        if(isEmpty(*top)){
+        if(isEmpty(s->top)){
             printf("underflow");
         }else{
 
-           int popValue = stack[*top];
-           (*top)--;
+           int popValue = s->arr[s->top];
+           (s->top)--;
 
           printf("\n\nsuccessfully poped the value %d",popValue);
         }
 }
 
 
-void peek(int top,int stack[]){
-    if(isEmpty(top)){
+void peek(struct stack *s){
+    if(isEmpty(s->top)){
             printf("stack is empty");
 
 
     }else{
-        printf("\n\n%d is the top now",stack[top]);
+        printf("\n\n%d is the top now",s->arr[s->top]);
     }
 }
 
@@ -75,8 +76,9 @@ void peek(int top,int stack[]){
 
 int main(){
 
-    int top = -1;
-    int stack[N];
+ struct stack s1,s2,s3;
+
+ createstack(&s1);
 
 
 
@@ -94,23 +96,18 @@ while(1){
      scanf("%d",&entry);
 
 
-    push(entry,&top,stack);
-    //printf("%d",top);
+    push(entry,&s1);
+
     break;
 
  case 2:
-     //if(top>N-1){
-           // top = N-1;
 
-     //}
-
-
-    pop(&top,stack);
+    pop(&s1);
 
     break;
 
  case 3:
-    peek(top,stack);
+    peek(&s1);
     break;
 
  default:
