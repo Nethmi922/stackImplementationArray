@@ -20,40 +20,40 @@ Boolean isEmpty(int top){
 
 Boolean isFull(int top){
 
-   return (top >= N);
+   return (top == N-1);
           // printf("overflow condition occur");
 }
 
 
 
 
-void push(int entry,int top,int stack[]){
+void push(int entry,int *top,int stack[]){
 
 
-        if(isFull(top)){
+        if(isFull(*top)){
             printf("overflow");
-            printf("%d",top);
+           // printf("%d",top);
             //top--;
         }else{
-         //++top;
-         printf("%d",top);
+         ++(*top);
+         //printf("%d",top);
        // printf("Enter your number: ");
        // scanf("%d",&stack[top]);
-         stack[top]=entry;
+         stack[*top]=entry;
 
         printf("\n\nsuccessfully entered the value %d",entry);
 
         }
 }
 
-void pop(int top,int stack[]){
+void pop(int *top,int stack[]){
 
-        if(isEmpty(top)){
+        if(isEmpty(*top)){
             printf("underflow");
         }else{
 
-           int popValue = stack[top+1];
-           //top--;
+           int popValue = stack[*top];
+           (*top)--;
 
           printf("\n\nsuccessfully poped the value %d",popValue);
         }
@@ -94,18 +94,18 @@ while(1){
      scanf("%d",&entry);
 
 
-    push(entry,++top,stack);
+    push(entry,&top,stack);
     //printf("%d",top);
     break;
 
  case 2:
-     if(top>N-1){
-            top = N-1;
+     //if(top>N-1){
+           // top = N-1;
 
-     }
+     //}
 
 
-    pop(--top,stack);
+    pop(&top,stack);
 
     break;
 
